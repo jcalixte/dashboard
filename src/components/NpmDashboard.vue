@@ -1,12 +1,17 @@
 <template>
   <div class="npm-dashboard">
-    <h2>
-      {{ name }}
-    </h2>
-    <div class="header">
-      <h3>Cette semaine : {{ result.totalWeek }}.</h3>
-      <h3>Ce mois : {{ result.totalMonth }}.</h3>
-    </div>
+    <h2>{{ name }} ({{ result.stars }} étoiles)</h2>
+    <table>
+      <tr>
+        <th>mois</th>
+        <th>semaine</th>
+      </tr>
+      <tr>
+        <td>{{ result.totalMonth }}</td>
+        <td>{{ result.totalWeek }}</td>
+      </tr>
+    </table>
+
     <svg viewBox="0 0 100 100">
       <polyline :points="graphPoints" />
     </svg>
@@ -15,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api'
-import { PkgResult } from '@/services/npm.hooks'
+import { PkgResult } from '@/services/repo.hooks'
 import { useGraph } from '@/services/graph.hooks'
 
 export default defineComponent({
@@ -38,9 +43,13 @@ export default defineComponent({
 .npm-dashboard {
   text-align: center;
 
-  .header {
-    display: flex;
-    gap: 2rem;
+  table {
+    margin: auto;
+
+    th,
+    td {
+      padding: 5px;
+    }
   }
 
   svg {

@@ -14,7 +14,7 @@
 
 <script>
 import { defineComponent } from '@vue/composition-api'
-import { useNpm } from '@/services/npm.hooks'
+import { useRepo } from '@/services/repo.hooks'
 
 export default defineComponent({
   name: 'DashBoard',
@@ -22,7 +22,7 @@ export default defineComponent({
     NpmDashboard: () => import('@/components/NpmDashboard.vue')
   },
   setup() {
-    const { pwa, onlineOffline, init } = useNpm()
+    const { pwa, onlineOffline, init } = useRepo()
     init()
 
     return {
