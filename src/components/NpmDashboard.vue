@@ -1,0 +1,58 @@
+<template>
+  <div class="npm-dashboard">
+    <h2>
+      {{ name }}
+    </h2>
+    <div class="header">
+      <h3>Cette semaine : {{ result.totalWeek }}.</h3>
+      <h3>Ce mois : {{ result.totalMonth }}.</h3>
+    </div>
+    <svg viewBox="0 0 100 100">
+      <polyline :points="graphPoints" />
+    </svg>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, PropType } from '@vue/composition-api'
+import { PkgResult } from '@/services/npm.hooks'
+import { useGraph } from '@/services/graph.hooks'
+
+export default defineComponent({
+  name: 'NpmDashBoard',
+  props: {
+    name: { type: String, required: true },
+    result: { type: Object as PropType<PkgResult>, required: true }
+  },
+  setup(props) {
+    const graphPoints = useGraph(props.result.lastMonth)
+
+    return {
+      graphPoints
+    }
+  }
+})
+</script>
+
+<style scoped lang="scss">
+.npm-dashboard {
+  text-align: center;
+
+  .header {
+    display: flex;
+    gap: 2rem;
+  }
+
+  svg {
+    width: 100px;
+    height: 100px;
+
+    polyline {
+      fill: none;
+      stroke: green;
+      stroke-width: 2;
+      text-align: center;
+    }
+  }
+}
+</style>
