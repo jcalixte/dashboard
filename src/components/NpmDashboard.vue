@@ -24,9 +24,30 @@
         </th>
       </tr>
       <tr>
-        <td>{{ result.totalMonth }}</td>
-        <td>{{ result.totalWeek }}</td>
-        <td>{{ result.stars }}</td>
+        <td>
+          <number
+            :from="0"
+            :to="result.totalMonth"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
+        <td>
+          <number
+            :from="0"
+            :to="result.totalWeek"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
+        <td>
+          <number
+            :from="0"
+            :to="result.stars"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
       </tr>
     </table>
 
@@ -45,6 +66,7 @@ import { useGraph } from '@/services/graph.hooks'
 
 export default defineComponent({
   name: 'NpmDashBoard',
+  components: {},
   props: {
     name: { type: String, required: true },
     result: { type: Object as PropType<PkgResult>, required: true }
