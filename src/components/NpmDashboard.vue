@@ -1,17 +1,21 @@
 <template>
   <div class="npm-dashboard">
     <h2>{{ name }}</h2>
+    <p>
+      <a :href="result.npmUrl" rel="noopener" target="_blank">npm</a>
+      &nbsp;
+      <a :href="result.githubUrl" rel="noopener" target="_blank">GitHub</a>
+    </p>
     <table>
       <tr>
-        <th>mois</th>
         <th>semaine</th>
+        <th>mois</th>
         <th>
           <svg
             viewBox="0 0 24 24"
             width="24"
             height="24"
             fill="none"
-            stroke="#ecf0f1"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -21,16 +25,22 @@
             ></polygon>
           </svg>
         </th>
+        <th v-if="result.issues">
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+            ></path>
+          </svg>
+        </th>
       </tr>
       <tr>
-        <td>
-          <number
-            :from="0"
-            :to="result.totalMonth"
-            :duration="1"
-            easing="Power1.easeOut"
-          />
-        </td>
         <td>
           <number
             :from="0"
@@ -42,7 +52,23 @@
         <td>
           <number
             :from="0"
+            :to="result.totalMonth"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
+        <td>
+          <number
+            :from="0"
             :to="result.stars"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
+        <td v-if="result.issues">
+          <number
+            :from="0"
+            :to="result.issues"
             :duration="1"
             easing="Power1.easeOut"
           />
@@ -89,7 +115,7 @@ export default defineComponent({
 
     th,
     td {
-      padding: 5px;
+      padding: 0.2rem 1rem;
     }
   }
 
