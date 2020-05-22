@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 
+$color: #ecf0f1;
+
 html {
   font-family: 'Ubuntu Mono', monospace;
   font-size: 1.3rem;
   background-color: #091a46;
-  color: #ecf0f1;
+  color: $color;
+}
+
+svg {
+  stroke: $color;
 }
