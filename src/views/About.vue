@@ -1,5 +1,7 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Tableau de bord Juju</h1>
+
+    <p>Ceci est un tableau de bord personnalisé spécial pour Juju</p>
   </div>
 </template>
