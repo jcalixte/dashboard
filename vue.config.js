@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-const mainColor = '#3f4fa6'
+const mainColor = '#091a46'
 
 module.exports = {
   pwa: {
@@ -9,7 +9,7 @@ module.exports = {
       skipWaiting: true,
       clientsClaim: true
     },
-    name: '',
+    name: 'tableau juju',
     manifestOptions: {
       background_color: mainColor,
       theme_color: mainColor,
@@ -23,6 +23,18 @@ module.exports = {
           src: './img/icons/android-chrome-512x512.png',
           sizes: '512x512',
           type: 'image/png'
+        },
+        {
+          src: './img/icons/android-chrome-maskable-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+          purpose: 'maskable'
+        },
+        {
+          src: './img/icons/android-chrome-maskable-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable'
         },
         {
           src: './img/icons/apple-touch-icon-60x60.png',
