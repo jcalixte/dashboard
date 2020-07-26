@@ -5,6 +5,9 @@
       <section v-if="pwa">
         <NpmDashboard name="Vue PWA asset generator" :result="pwa" />
       </section>
+      <section v-if="retrobus">
+        <NpmDashboard name="Retrobus" :result="retrobus" />
+      </section>
       <section v-if="onlineOffline">
         <NpmDashboard name="Vue Online Offline" :result="onlineOffline" />
       </section>
@@ -22,12 +25,13 @@ export default defineComponent({
     NpmDashboard: () => import('@/components/NpmDashboard.vue')
   },
   setup() {
-    const { pwa, onlineOffline, init } = useRepo()
+    const { pwa, onlineOffline, retrobus, init } = useRepo()
     init()
 
     return {
       pwa,
-      onlineOffline
+      onlineOffline,
+      retrobus
     }
   }
 })

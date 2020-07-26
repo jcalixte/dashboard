@@ -17,6 +17,7 @@ export interface PkgResult {
 interface NpmResult {
   pwa: PkgResult | null
   onlineOffline: PkgResult | null
+  retrobus: PkgResult | null
 }
 
 const toPkgResult = (
@@ -24,9 +25,9 @@ const toPkgResult = (
   pkgMonth: NpmRange,
   repo: GithubRepo
 ): PkgResult => ({
-  totalWeek: pkgWeek.downloads.reduce((a, b) => a + b.downloads, 0),
-  totalMonth: pkgMonth.downloads.reduce((a, b) => a + b.downloads, 0),
-  lastMonth: pkgMonth.downloads.map(({ downloads }) => downloads),
+  totalWeek: pkgWeek?.downloads?.reduce((a, b) => a + b.downloads, 0) ?? 0,
+  totalMonth: pkgMonth?.downloads?.reduce((a, b) => a + b.downloads, 0) ?? 0,
+  lastMonth: pkgMonth?.downloads?.map(({ downloads }) => downloads) ?? [],
   stars: repo.stargazers_count,
   issues: repo.open_issues_count,
   npmUrl: `https://www.npmjs.com/package/${pkgWeek.package}`,
@@ -36,30 +37,43 @@ const toPkgResult = (
 export const useRepo = () => {
   const state = reactive<NpmResult>({
     pwa: null,
-    onlineOffline: null
+    onlineOffline: null,
+    retrobus: null
   })
 
   const init = async () => {
     const pwa = 'vue-pwa-asset-generator'
     const onlineOffline = 'vue-online-offline'
+    const retrobus = 'retrobus'
     const [
       pwaWeekPkg,
       pwaMonthPkg,
       pwaRepo,
       onlineWeekPkg,
       onlineMonthPkg,
-      onlineRepo
+      onlineRepo,
+      retrobusWeekPkg,
+      retrobusMonthPkg,
+      retrobusRepo
     ] = await Promise.all([
       fetchWeekPackage(pwa),
       fetchMonthPackage(pwa),
       fetchRepo(pwa),
       fetchWeekPackage(onlineOffline),
       fetchMonthPackage(onlineOffline),
-      fetchRepo(onlineOffline)
+      fetchRepo(onlineOffline),
+      fetchWeekPackage(retrobus),
+      fetchMonthPackage(retrobus),
+      fetchRepo(retrobus)
     ])
 
     state.pwa = toPkgResult(pwaWeekPkg, pwaMonthPkg, pwaRepo)
     state.onlineOffline = toPkgResult(onlineWeekPkg, onlineMonthPkg, onlineRepo)
+    state.retrobus = toPkgResult(
+      retrobusWeekPkg,
+      retrobusMonthPkg,
+      retrobusRepo
+    )
   }
 
   return {
