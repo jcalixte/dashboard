@@ -10,5 +10,12 @@ export const useGraph = (points: number[]) => {
     x: abs[index]
   }))
 
-  return ref(graphPoints.map(({ x, y }) => `${x},${y}`).join(' '))
+  const graphSize = {
+    x: Math.max(...graphPoints.map((point) => point.x))
+  }
+
+  return {
+    points: ref(graphPoints.map(({ x, y }) => `${x},${y}`).join(' ')),
+    graphSize
+  }
 }

@@ -77,7 +77,7 @@
     </table>
 
     <div class="graph">
-      <svg viewBox="0 0 100 100">
+      <svg :viewBox="`0 0 ${graphSize} 100`">
         <polyline :points="graphPoints" />
       </svg>
     </div>
@@ -97,10 +97,11 @@ export default defineComponent({
     result: { type: Object as PropType<PkgResult>, required: true }
   },
   setup(props) {
-    const graphPoints = useGraph(props.result.lastMonth)
+    const { points, graphSize } = useGraph(props.result.lastMonth)
 
     return {
-      graphPoints
+      graphPoints: points,
+      graphSize
     }
   }
 })
@@ -122,7 +123,6 @@ export default defineComponent({
   .graph {
     svg {
       width: 100px;
-      height: 100px;
 
       polyline {
         fill: none;
