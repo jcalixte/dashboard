@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard">
-    <h1>NPM</h1>
     <section class="section">
       <section v-if="pwa">
         <NpmDashboard name="Vue PWA asset generator" :result="pwa" />
