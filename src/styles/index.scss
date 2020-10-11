@@ -9,6 +9,10 @@ html {
   color: $color;
 }
 
+body {
+  margin: 0;
+}
+
 svg {
   stroke: $color;
   fill: $color;
