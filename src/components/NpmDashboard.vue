@@ -8,39 +8,25 @@
     </p>
     <table>
       <tr>
+        <th>jour</th>
         <th>semaine</th>
         <th>mois</th>
         <th>
-          <svg
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-            ></polygon>
-          </svg>
+          <img src="@/assets/star.svg" alt="stars" />
         </th>
         <th v-if="result.issues">
-          <svg
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-            ></path>
-          </svg>
+          <img src="@/assets/issue.svg" alt="issues" />
         </th>
       </tr>
       <tr>
+        <td>
+          <number
+            :from="0"
+            :to="result.totalDay"
+            :duration="1"
+            easing="Power1.easeOut"
+          />
+        </td>
         <td>
           <number
             :from="0"
